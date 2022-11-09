@@ -1,38 +1,52 @@
 import './App.scss';
+import Header from './components/Header/Header';
+import Card from './components/Card/Card';
+
+const cardsItems = [
+  {
+    linkImg: './images/card-item-1.jpg',
+    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
+    price: 12999
+  },
+  {
+    linkImg: './images/card-item-2.jpg',
+    title: 'Мужские Кроссовки Nike Air Max 270',
+    price: 10999
+  },
+  {
+    linkImg: './images/card-item-3.jpg',
+    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
+    price: 11999
+  },
+  {
+    linkImg: './images/card-item-4.jpg',
+    title: 'Кроссовки Puma X Aka Boku Future Rider',
+    price: 8999
+  }
+]
 
 function App() {
   return (
     <div className="page">
-      <header className='header'>
-        <div className='header__logo'>
-          <img className='header__logo-img' src='./images/logo.svg' alt='Логотип'></img>
-          <div className='header__logo-info'>
-            <h3 className='header__logo-title'>REACT SNEAKERS</h3>
-            <p className='header__logo-subtitle'>Магазин лучших кроссовок</p>
+      <Header />
+      <div className='cards'>
+        <div className='cards__header'>
+          <h1 className='cards__title'>Все кроссовки</h1>
+          <div className='cards__search'>
+            <img className='cards__search-icon' src='./images/cards-search-icon.svg' alt='кнопка поиска товаров' />
+            <input className='cards__search-input' placeholder='Поиск...'></input>
           </div>
         </div>
-
-        <nav>
-          <ul className='header__menu'>
-            <li>
-              <button className='header__menu-button'>
-                <img className='header__menu-icon' src='./images/menu-basket-icon.svg'></img>
-                <span className='header__menu-text'>1205 руб.</span>
-              </button>
-            </li>
-            <li>
-              <button className='header__menu-button'>
-                <img className='header__menu-icon' src='./images/menu-heart-icon.svg'></img>
-              </button>
-            </li>
-            <li>
-              <button className='header__menu-button'>
-                <img className='header__menu-icon' src='./images/menu-profile-icon.svg'></img>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </header>
+        <ul className='cards__list'>
+          {cardsItems.map((item) => (
+            <Card
+              linkImg={item.linkImg}
+              title={item.title}
+              price={item.price}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
