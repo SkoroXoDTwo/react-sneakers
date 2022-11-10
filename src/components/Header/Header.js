@@ -1,7 +1,7 @@
 import React from 'react';
 import './header.scss';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header className='header'>
       <div className='header__logo'>
@@ -15,7 +15,7 @@ const Header = () => {
       <nav>
         <ul className='header__menu'>
           <li>
-            <button className='header__menu-button'>
+            <button className='header__menu-button' onClick={props.onClickBasket}>
               <img className='header__menu-icon' src='./images/menu-basket-icon.svg' alt="кнопка меню корзины"></img>
               <span className='header__menu-text'>1205 руб.</span>
             </button>

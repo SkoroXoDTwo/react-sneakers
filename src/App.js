@@ -1,10 +1,12 @@
 import './App.scss';
 import Header from './components/Header/Header';
+import Basket from './components/Basket/Basket';
 import Card from './components/Card/Card';
 import React from 'react';
 
 function App() {
   const [items, setItems] = React.useState([]);
+  const [basketOpened, setBasketOpened] = React.useState(false);
 
   React.useEffect(() => {
     fetch('https://636d0228ab4814f2b275a28e.mockapi.io/react-sneakers')
@@ -19,17 +21,12 @@ function App() {
 
   return (
     <div className="page">
-
-      <div className='basket'>
-        <div className='basket__container'>
-          <div className='basket__header'>
-            <h2 className='basket__title'>Корзина</h2>
-            <button className='basket__close-btn'></button>
-          </div>
-        </div>
-      </div>
-
-      <Header />
+      <Basket
+        basketOpened={basketOpened}
+      />
+      <Header
+        onClickBasket={() => setBasketOpened(true)}
+      />
       <div className='cards'>
         <div className='cards__header'>
           <h1 className='cards__title'>Все кроссовки</h1>
