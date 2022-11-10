@@ -29,6 +29,10 @@
     &:hover {
       cursor: pointer;
     }
+
+    &_active {
+      background: url(../../../public/images/card-like-btn-active.svg);
+    }
   }
 
   &__img {
@@ -79,9 +83,14 @@
     border: none;
     height: 32px;
     width: 32px;
+    transition: background .2s;
 
     &:hover {
       cursor: pointer;
+    }
+
+    &_active {
+      background: url(../../../public/images/card-add-btn-active.svg);
     }
   }
 }
