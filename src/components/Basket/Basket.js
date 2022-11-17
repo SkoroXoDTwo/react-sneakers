@@ -1,7 +1,7 @@
 import React from 'react';
 import './basket.scss';
 
-const Basket = ({onClickCloseBtn, items = []}) => {
+const Basket = ({items = [], onClickCloseBtn, onRemoveItem}) => {
 
 
   return (
@@ -22,7 +22,7 @@ const Basket = ({onClickCloseBtn, items = []}) => {
                     <h3 className='basket__item-title'>{item.title}</h3>
                     <p className='basket__item-price'>{item.price} руб.</p>
                   </div>
-                  <div className='basket__item-delete-btn'></div>
+                  <div className='basket__item-delete-btn' onClick={() => onRemoveItem(item.id)}></div>
                 </article>
               </li>
               )}

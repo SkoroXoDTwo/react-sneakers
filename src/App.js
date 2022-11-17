@@ -1,8 +1,10 @@
 import './App.scss';
+import React from 'react';
+import axios from 'axios';
 import Header from './components/Header/Header';
 import Basket from './components/Basket/Basket';
 import Card from './components/Card/Card';
-import React from 'react';
+
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -11,21 +13,28 @@ function App() {
   const [searchValue, setSearchValue] = React.useState('');
 
   React.useEffect(() => {
-    fetch('https://636d0228ab4814f2b275a28e.mockapi.io/react-sneakers')
+    axios.get('https://636d0228ab4814f2b275a28e.mockapi.io/items')
       .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        setItems(json);
+        setItems(res.data);
+      });
+
+    axios.get('https://636d0228ab4814f2b275a28e.mockapi.io/basket')
+      .then((res) => {
+        setBasketItems(res.data);
       });
   }, []);
 
   const onAddToBasket = (obj) => {
+    axios.post('https://636d0228ab4814f2b275a28e.mockapi.io/basket', obj);
     setBasketItems((prev) => [...prev, obj]);
   };
 
+  const onRemoveToBasket = (id) => {
+   axios.delete(`https://636d0228ab4814f2b275a28e.mockapi.io/basket/${id}`);
+   setBasketItems((prev) => prev.filter(item => item.id !== id));
+  };
+
   const onChangeSearchInput = (evt) => {
-    console.log(evt.target.value);
     setSearchValue(evt.target.value);
   }
 
@@ -33,8 +42,9 @@ function App() {
     <div className="page">
       {basketOpened &&
         <Basket
-          onClickCloseBtn={() => setBasketOpened(false)}
           items={basketItems}
+          onClickCloseBtn={() => setBasketOpened(false)}
+          onRemoveItem={onRemoveToBasket}
         />}
 
       <Header onClickBasket={() => setBasketOpened(true)} />
@@ -50,15 +60,15 @@ function App() {
         <ul className='cards__list'>
           {
             items
-            .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-            .map((item, index) =>
-              <Card
-                key={index}
-                linkImg={item.linkImg}
-                title={item.title}
-                price={item.price}
-                onAdd={(obj) => { onAddToBasket(obj) }}
-              />)
+              .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+              .map((item, index) =>
+                <Card
+                  key={index}
+                  linkImg={item.linkImg}
+                  title={item.title}
+                  price={item.price}
+                  onAdd={(obj) => { onAddToBasket(obj) }}
+                />)
           }
         </ul>
       </div>
