@@ -1,28 +1,32 @@
 import React from 'react';
 import './basket.scss';
 
-const Basket = (props) => {
+const Basket = ({onClickCloseBtn, items = []}) => {
 
-  console.log(props.basketOpened);
+
   return (
-    <div className={'basket' + (props.basketOpened ? ' basket_opened' : '')}>
+    <div className={'basket'}>
         <div className='basket__container'>
           <div className='basket__header'>
             <h2 className='basket__title'>Корзина</h2>
-            <button className='basket__close-btn'></button>
+            <button className='basket__close-btn' onClick={onClickCloseBtn}></button>
           </div>
 
           <ul className='basket__list'>
-            <li>
-              <article className='basket__item'>
-                <img className='basket__item-img' src='./images/card-item-1.jpg'></img>
-                <div className='basket__item-info'>
-                  <h3 className='basket__item-title'>Мужские Кроссовки Nike Air Max 270</h3>
-                  <p className='basket__item-price'>12 999 руб.</p>
-                </div>
-                <div className='basket__item-delete-btn'></div>
-              </article>
-            </li>
+
+            {items.map((item, index) =>
+              <li key={index}>
+                <article className='basket__item'>
+                  <img className='basket__item-img' src={`${item.linkImg}`}></img>
+                  <div className='basket__item-info'>
+                    <h3 className='basket__item-title'>{item.title}</h3>
+                    <p className='basket__item-price'>{item.price} руб.</p>
+                  </div>
+                  <div className='basket__item-delete-btn'></div>
+                </article>
+              </li>
+              )}
+
           </ul>
           <div className='basket__count-container'>
             <p className='basket__count-title'>Итого:</p>

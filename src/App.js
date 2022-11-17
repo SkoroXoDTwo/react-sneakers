@@ -6,6 +6,7 @@ import React from 'react';
 
 function App() {
   const [items, setItems] = React.useState([]);
+  const [basketItems, setBasketItems] = React.useState([]);
   const [basketOpened, setBasketOpened] = React.useState(false);
 
   React.useEffect(() => {
@@ -18,15 +19,20 @@ function App() {
     });
   }, []);
 
+  const onAddToBasket = (obj) => {
+    console.log(obj);
+    setBasketItems([...basketItems, obj]);
+  };
 
   return (
     <div className="page">
-      <Basket
-        basketOpened={basketOpened}
-      />
-      <Header
-        onClickBasket={() => setBasketOpened(true)}
-      />
+      {basketOpened &&
+        <Basket
+          onClickCloseBtn={() => setBasketOpened(false)}
+          items={basketItems}
+          />}
+
+      <Header onClickBasket={() => setBasketOpened(true)} />
       <div className='cards'>
         <div className='cards__header'>
           <h1 className='cards__title'>Все кроссовки</h1>
@@ -43,6 +49,7 @@ function App() {
               linkImg={item.linkImg}
               title={item.title}
               price={item.price}
+              onAdd={(obj) => {onAddToBasket(obj)}}
             />)
           }
         </ul>
