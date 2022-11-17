@@ -7,7 +7,7 @@ const Card = ({key, linkImg, title, price, onAdd}) => {
   const [isLiked, likeCard] = useState(false);
 
   const onClickAdd = () => {
-    onAdd({linkImg, title, price});
+    onAdd({ linkImg, title, price });
     addCardInBasket(!isAdded);
   }
 
