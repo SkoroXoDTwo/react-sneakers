@@ -9,6 +9,7 @@ import Card from './components/Card/Card';
 function App() {
   const [items, setItems] = React.useState([]);
   const [basketItems, setBasketItems] = React.useState([]);
+  const [favorites, setFavorites] = React.useState([]);
   const [basketOpened, setBasketOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -30,8 +31,13 @@ function App() {
   };
 
   const onRemoveToBasket = (id) => {
-   axios.delete(`https://636d0228ab4814f2b275a28e.mockapi.io/basket/${id}`);
-   setBasketItems((prev) => prev.filter(item => item.id !== id));
+    axios.delete(`https://636d0228ab4814f2b275a28e.mockapi.io/basket/${id}`);
+    setBasketItems((prev) => prev.filter(item => item.id !== id));
+  };
+
+  const onAddToFavorite = (obj) => {
+    axios.post('https://636d0228ab4814f2b275a28e.mockapi.io/favorites', obj);
+    setFavorites((prev) => [...prev, obj]);
   };
 
   const onChangeSearchInput = (evt) => {
@@ -64,10 +70,12 @@ function App() {
               .map((item, index) =>
                 <Card
                   key={index}
+                  id={item.id}
                   linkImg={item.linkImg}
                   title={item.title}
                   price={item.price}
-                  onAdd={(obj) => { onAddToBasket(obj) }}
+                  onAdd={(obj) => onAddToBasket(obj)}
+                  onFavorite={(obj) => onAddToFavorite(obj)}
                 />)
           }
         </ul>
