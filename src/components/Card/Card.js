@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import './card.scss';
 
-const Card = ({ id, linkImg, title, price, onAdd, onFavorite}) => {
+const Card = ({ id, linkImg, title, price, onAdd, onFavorite, favorited = false, basketItems = []}) => {
 
-  const [isAdded, setIsAdded] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isAdded, setIsAdded] = useState(basketItems.some((item) => item.listId === id));
+  const [isFavorite, setIsFavorite] = useState(favorited);
 
   const onClickAdd = () => {
-    onAdd({ linkImg, title, price, id });
+    onAdd({ linkImg, title, price, id, listId: id });
     setIsAdded(!isAdded);
   }
 
   const onClickFavorite = () => {
-    onFavorite({linkImg, title, price});
+    onFavorite({linkImg, title, price, id});
     setIsFavorite(!isFavorite);
   }
 
