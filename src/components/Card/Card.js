@@ -6,21 +6,34 @@ const Card = ({ id, linkImg, title, price, onAdd, onFavorite, listId }) => {
 
   const { isItemAdded } = React.useContext(AppContext);
   const { isItemFavorite } = React.useContext(AppContext);
-  const { favorites } = React.useContext(AppContext);
+  const [btnAddActive, setBtnAddActive] = React.useState(false);
+  const [btnLikeActive, setBtnLikeActive] = React.useState(false);
 
-  const onClickAdd = () => {
-    onAdd({ linkImg, title, price, id, listId: id });
+  const onClickAdd = async () => {
+    setBtnAddActive(true);
+    await onAdd({ linkImg, title, price, id, listId: id });
+    setBtnAddActive(false);
   }
-  const onClickFavorite = () => {
-    console.log(listId);
-    onFavorite({ linkImg, title, price, id, listId });
+  const onClickFavorite = async () => {
+    setBtnLikeActive(true);
+    await onFavorite({ linkImg, title, price, id, listId });
+    setBtnLikeActive(false);
   }
 
   return (
     <li>
       <article className='card'>
         <div className='card__img-container'>
-          <button className={'card__like-btn ' + (isItemFavorite(listId) ? 'card__like-btn_active' : '')} onClick={onClickFavorite}></button>
+          <button
+            className={
+              'card__like-btn ' +
+              (isItemFavorite(listId) ?
+                'card__like-btn_type_active' : '') +
+              (btnLikeActive ? 'card__like-btn_type_loading' : '')
+            }
+            onClick={onClickFavorite}
+            disabled={btnLikeActive}>
+          </button>
           <img className='card__img' src={linkImg} alt="Фоторграфия кроссовок"></img>
         </div>
         <h2 className='card__title'>{title}</h2>
@@ -29,7 +42,15 @@ const Card = ({ id, linkImg, title, price, onAdd, onFavorite, listId }) => {
             <p className='card__price-title'>Цена:</p>
             <span className='card__price'>{price} руб.</span>
           </div>
-          <button className={'card__add-btn ' + (isItemAdded(id) ? 'card__add-btn_active' : '')} onClick={onClickAdd}></button>
+          <button
+            className={
+              'card__add-btn ' +
+              (isItemAdded(id) ? 'card__add-btn_type_active' : '') +
+              (btnAddActive ? 'card__add-btn_type_loading' : '')
+            }
+            onClick={onClickAdd}
+            disabled={btnAddActive}>
+          </button>
         </div>
       </article>
     </li>

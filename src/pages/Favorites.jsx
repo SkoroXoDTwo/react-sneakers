@@ -2,7 +2,7 @@ import React from 'react';
 import { AppContext } from '../App';
 import Card from '../components/Card/Card';
 
-function Favorites({ onAddToFavorite }) {
+function Favorites({ onAddToFavorite, onAddToBasket }) {
   const { favorites } = React.useContext(AppContext);
 
   return (
@@ -20,6 +20,7 @@ function Favorites({ onAddToFavorite }) {
             .map((item, index) =>
               <Card
                 key={index}
+                onAdd={(obj) => onAddToBasket(obj)}
                 onFavorite={(obj) => onAddToFavorite(obj)}
                 favorited={true}
                 listId={item.listId}

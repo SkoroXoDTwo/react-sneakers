@@ -43,7 +43,7 @@ function App() {
       }
     }
     catch (error) {
-      console.log('Что-то пошло не так');
+      alert(error);
     }
   };
 
@@ -108,6 +108,7 @@ function App() {
           <Route path="/favorites" element={
             <Favorites
               onAddToFavorite={onAddToFavorite}
+              onAddToBasket={onAddToBasket}
             />
           } />
         </Routes>

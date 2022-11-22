@@ -30,8 +30,15 @@
       cursor: pointer;
     }
 
-    &_active {
-      background: url(../../../public/images/card-like-btn-active.svg);
+    &_type {
+
+      &_active {
+        background: url(../../../public/images/card-like-btn-active.svg);
+      }
+
+      &_loading {
+        background: url(../../../public/images/card-add-btn-loading.svg);
+      }
     }
   }
 
@@ -40,6 +47,7 @@
     height: 112px;
     object-fit: contain;
   }
+
   &__title {
     padding: 0;
     margin: 0 0 14px;
@@ -89,8 +97,15 @@
       cursor: pointer;
     }
 
-    &_active {
-      background: url(../../../public/images/card-add-btn-active.svg);
+    &_type {
+
+      &_active {
+        background: url(../../../public/images/card-add-btn-active.svg);
+      }
+
+      &_loading {
+        background: url(../../../public/images/card-add-btn-loading.svg);
+      }
     }
   }
 }
