@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppContext } from '../App';
 import Card from '../components/Card/Card';
+
 function Favorites({ onAddToFavorite }) {
-  const state = React.useContext(AppContext);
   const { favorites } = React.useContext(AppContext);
 
   return (
@@ -22,6 +22,7 @@ function Favorites({ onAddToFavorite }) {
                 key={index}
                 onFavorite={(obj) => onAddToFavorite(obj)}
                 favorited={true}
+                listId={item.listId}
                 {...item}
               />)
         }

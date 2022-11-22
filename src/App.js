@@ -47,15 +47,18 @@ function App() {
     }
   };
 
-  const onRemoveToBasket = (id, item) => {
+  const onRemoveToBasket = (id) => {
     axios.delete(`https://636d0228ab4814f2b275a28e.mockapi.io/basket/${id}`);
     setBasketItems((prev) => prev.filter(item => item.id !== id));
   };
 
   const onAddToFavorite = async (obj) => {
     try {
-      if (favorites.find((favObj) => favObj.id === obj.id)) {
-        axios.delete(`https://636d0228ab4814f2b275a28e.mockapi.io/favorites/${obj.id}`);
+      const item = favorites.find((item) => Number(item.listId) === Number(obj.listId));
+
+      if (favorites.find((favObj) => favObj.listId === obj.listId)) {
+        axios.delete(`https://636d0228ab4814f2b275a28e.mockapi.io/favorites/${item.id}`);
+        setFavorites((prev) => prev.filter(item => Number(item.listId) !== Number(obj.listId)));
       } else {
         const { data } = await axios.post('https://636d0228ab4814f2b275a28e.mockapi.io/favorites', obj);
         setFavorites((prev) => [...prev, data]);
@@ -75,8 +78,12 @@ function App() {
     return basketItems.some((obj) => Number(obj.listId) === Number(id))
   }
 
+  const isItemFavorite = (id) => {
+    return favorites.some((obj) => Number(obj.listId) === Number(id))
+  }
+
   return (
-    <AppContext.Provider value={{ items, basketItems, favorites, isItemAdded }}>
+    <AppContext.Provider value={{ items, basketItems, favorites, isItemAdded, isItemFavorite }}>
       <div className="page">
         {basketOpened &&
           <Basket
@@ -90,7 +97,6 @@ function App() {
         <Routes>
           <Route path="/" element={
             <Home
-              items={items}
               searchValue={searchValue}
               setSearchValue={setSearchValue}
               onAddToBasket={onAddToBasket}

@@ -1,5 +1,11 @@
+import React from 'react';
 import Card from '../components/Card/Card';
-function Home({items, searchValue, setSearchValue, onAddToBasket, onAddToFavorite, onChangeSearchInput, basketItems}) {
+
+import { AppContext } from '../App';
+
+function Home({searchValue, setSearchValue, onAddToBasket, onAddToFavorite, onChangeSearchInput, basketItems}) {
+  const { items } = React.useContext(AppContext);
+
   return (
     <div className='cards'>
       <div className='cards__header'>
@@ -20,6 +26,7 @@ function Home({items, searchValue, setSearchValue, onAddToBasket, onAddToFavorit
                 onAdd={(obj) => onAddToBasket(obj)}
                 onFavorite={(obj) => onAddToFavorite(obj)}
                 basketItems={basketItems}
+                listId={item.id}
                 { ... item }
               />)
         }

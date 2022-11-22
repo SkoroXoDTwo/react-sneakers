@@ -2,27 +2,25 @@ import React, { useState } from 'react';
 import { AppContext } from '../../App';
 import './card.scss';
 
-const Card = ({ id, linkImg, title, price, onAdd, onFavorite, favorited = false, basketItems = [] }) => {
+const Card = ({ id, linkImg, title, price, onAdd, onFavorite, listId }) => {
 
   const { isItemAdded } = React.useContext(AppContext);
-  const [isFavorite, setIsFavorite] = useState(favorited);
-
-
+  const { isItemFavorite } = React.useContext(AppContext);
+  const { favorites } = React.useContext(AppContext);
 
   const onClickAdd = () => {
     onAdd({ linkImg, title, price, id, listId: id });
   }
-
   const onClickFavorite = () => {
-    onFavorite({ linkImg, title, price, id });
-    setIsFavorite(!isFavorite);
+    console.log(listId);
+    onFavorite({ linkImg, title, price, id, listId });
   }
 
   return (
     <li>
       <article className='card'>
         <div className='card__img-container'>
-          <button className={'card__like-btn ' + (isFavorite ? 'card__like-btn_active' : '')} onClick={onClickFavorite}></button>
+          <button className={'card__like-btn ' + (isItemFavorite(listId) ? 'card__like-btn_active' : '')} onClick={onClickFavorite}></button>
           <img className='card__img' src={linkImg} alt="Фоторграфия кроссовок"></img>
         </div>
         <h2 className='card__title'>{title}</h2>
