@@ -95,12 +95,12 @@ function App() {
   return (
     <AppContext.Provider value={{ items, basketItems, favorites, isItemAdded, isItemFavorite, calculateSumBasket }}>
       <div className="page">
-        {basketOpened &&
-          <Basket
-            items={basketItems}
-            onClickCloseBtn={() => setBasketOpened(false)}
-            onRemoveItem={onRemoveToBasket}
-          />}
+        <Basket
+          basketOpened={basketOpened}
+          items={basketItems}
+          onClickCloseBtn={() => setBasketOpened(false)}
+          onRemoveItem={onRemoveToBasket}
+        />
 
         <Header onClickBasket={() => setBasketOpened(true)} />
 

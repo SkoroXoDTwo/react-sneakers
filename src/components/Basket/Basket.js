@@ -1,12 +1,14 @@
 import React from 'react';
 import './basket.scss';
+import { AppContext } from '../../App';
 
-const Basket = ({ items = [], onClickCloseBtn, onRemoveItem }) => {
-
+const Basket = ({ items = [], onClickCloseBtn, onRemoveItem, basketOpened }) => {
+  const { calculateSumBasket } = React.useContext(AppContext);
 
   return (
-    <div className={'basket'}>
-      <div className='basket__container'>
+    <div className={'basket ' + (basketOpened ? 'basket_opened' : '')}>
+      <div className='basket__overlay' onClick={onClickCloseBtn}></div>
+      <div className={'basket__container ' + (basketOpened ? 'basket__container_anim_open' : 'basket__container_anim_close')}>
         <div className='basket__header'>
           <h2 className='basket__title'>Корзина</h2>
           <button className='basket__close-btn' onClick={onClickCloseBtn}></button>
@@ -41,23 +43,23 @@ const Basket = ({ items = [], onClickCloseBtn, onRemoveItem }) => {
         }
         {items.length > 0 &&
           <div>
-          <div className='basket__count-container'>
-            <p className='basket__count-title'>Итого:</p>
-            <span className='basket__count-line'></span>
-            <span className='basket__count-price'>21 498 руб.</span>
+            <div className='basket__count-container'>
+              <p className='basket__count-title'>Итого:</p>
+              <span className='basket__count-line'></span>
+              <span className='basket__count-price'>{`${calculateSumBasket()} руб.`}</span>
+            </div>
+            <div className='basket__count-container'>
+              <p className='basket__count-title'>Доствка 5%</p>
+              <span className='basket__count-line'></span>
+              <span className='basket__count-price'>{`${Math.floor(calculateSumBasket() * 0.05)} руб.`}</span>
+            </div>
+            <button className='basket__process-btn'>
+              <p className='basket__btn-text'>Оформить заказ</p>
+              <span className='basket__btn-arrow'></span>
+            </button>
           </div>
-          <div className='basket__count-container'>
-            <p className='basket__count-title'>Доствка 5%</p>
-            <span className='basket__count-line'></span>
-            <span className='basket__count-price'>1074 руб.</span>
-          </div>
-          <button className='basket__process-btn'>
-            <p className='basket__btn-text'>Оформить заказ</p>
-            <span className='basket__btn-arrow'></span>
-          </button>
-        </div>
-          }
-    </div>
+        }
+      </div>
     </div >
   );
 };
