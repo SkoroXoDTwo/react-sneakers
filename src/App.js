@@ -7,6 +7,8 @@ import Basket from './components/Basket/Basket';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 
+export const AppContext = React.createContext([]);
+
 function App() {
   const [items, setItems] = React.useState([]);
   const [basketItems, setBasketItems] = React.useState([]);
@@ -41,11 +43,11 @@ function App() {
       }
     }
     catch (error) {
-      alert('Что-то пошло не так');
+      console.log('Что-то пошло не так');
     }
   };
 
-  const onRemoveToBasket = (id) => {
+  const onRemoveToBasket = (id, item) => {
     axios.delete(`https://636d0228ab4814f2b275a28e.mockapi.io/basket/${id}`);
     setBasketItems((prev) => prev.filter(item => item.id !== id));
   };
@@ -69,37 +71,43 @@ function App() {
     setSearchValue(evt.target.value);
   }
 
+  const isItemAdded = (id) => {
+    return basketItems.some((obj) => Number(obj.listId) === Number(id))
+  }
+
   return (
-    <div className="page">
-      {basketOpened &&
-        <Basket
-          items={basketItems}
-          onClickCloseBtn={() => setBasketOpened(false)}
-          onRemoveItem={onRemoveToBasket}
-        />}
+    <AppContext.Provider value={{ items, basketItems, favorites, isItemAdded }}>
+      <div className="page">
+        {basketOpened &&
+          <Basket
+            items={basketItems}
+            onClickCloseBtn={() => setBasketOpened(false)}
+            onRemoveItem={onRemoveToBasket}
+          />}
 
-      <Header onClickBasket={() => setBasketOpened(true)} />
+        <Header onClickBasket={() => setBasketOpened(true)} />
 
-      <Routes>
-        <Route path="/" element={
-          <Home
-            items={items}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-            onAddToBasket={onAddToBasket}
-            onAddToFavorite={onAddToFavorite}
-            onChangeSearchInput={onChangeSearchInput}
-            basketItems={basketItems}
-          />
-        } />
-        <Route path="/favorites" element={
-          <Favorites
-            items={favorites}
-            onAddToFavorite={onAddToFavorite}
-          />
-        } />
-      </Routes>
-    </div>
+        <Routes>
+          <Route path="/" element={
+            <Home
+              items={items}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              onAddToBasket={onAddToBasket}
+              onAddToFavorite={onAddToFavorite}
+              onChangeSearchInput={onChangeSearchInput}
+              basketItems={basketItems}
+            />
+          } />
+          <Route path="/favorites" element={
+            <Favorites
+              onAddToFavorite={onAddToFavorite}
+            />
+          } />
+        </Routes>
+      </div>
+    </AppContext.Provider>
+
   );
 }
 

@@ -23,7 +23,7 @@ const Basket = ({ items = [], onClickCloseBtn, onRemoveItem }) => {
                     <h3 className='basket__item-title'>{item.title}</h3>
                     <p className='basket__item-price'>{item.price} руб.</p>
                   </div>
-                  <div className='basket__item-delete-btn' onClick={() => onRemoveItem(item.id)}></div>
+                  <div className='basket__item-delete-btn' onClick={() => onRemoveItem(item.id, item)}></div>
                 </article>
               </li>
             )}
