@@ -82,8 +82,18 @@ function App() {
     return favorites.some((obj) => Number(obj.listId) === Number(id))
   }
 
+  const calculateSumBasket = () => {
+    let sum = Number(0);
+
+    basketItems.forEach(item => {
+      sum += Number(item.price);
+    });
+
+    return sum;
+  }
+
   return (
-    <AppContext.Provider value={{ items, basketItems, favorites, isItemAdded, isItemFavorite }}>
+    <AppContext.Provider value={{ items, basketItems, favorites, isItemAdded, isItemFavorite, calculateSumBasket }}>
       <div className="page">
         {basketOpened &&
           <Basket

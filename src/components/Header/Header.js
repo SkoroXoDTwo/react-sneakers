@@ -1,8 +1,11 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import './header.scss';
+import { AppContext } from '../../App';
 
 const Header = (props) => {
+  const { calculateSumBasket } = React.useContext(AppContext);
+
   return (
     <header className='header'>
       <Link to={'/'}>
@@ -20,7 +23,7 @@ const Header = (props) => {
           <li>
             <button className='header__menu-button' onClick={props.onClickBasket}>
               <img className='header__menu-icon' src='./images/menu-basket-icon.svg' alt="кнопка меню корзины"></img>
-              <span className='header__menu-text'>1205 руб.</span>
+              <span className='header__menu-text'>{`${calculateSumBasket()} руб.`}</span>
             </button>
           </li>
 

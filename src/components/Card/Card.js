@@ -11,8 +11,10 @@ const Card = ({ id, linkImg, title, price, onAdd, onFavorite, listId }) => {
 
   const onClickAdd = async () => {
     setBtnAddActive(true);
-    await onAdd({ linkImg, title, price, id, listId: id });
+    await onAdd({ linkImg, title, price, id, listId });
     setBtnAddActive(false);
+
+
   }
   const onClickFavorite = async () => {
     setBtnLikeActive(true);
@@ -27,8 +29,7 @@ const Card = ({ id, linkImg, title, price, onAdd, onFavorite, listId }) => {
           <button
             className={
               'card__like-btn ' +
-              (isItemFavorite(listId) ?
-                'card__like-btn_type_active' : '') +
+              (isItemFavorite(listId) ? 'card__like-btn_type_active ' : '') +
               (btnLikeActive ? 'card__like-btn_type_loading' : '')
             }
             onClick={onClickFavorite}
@@ -45,7 +46,7 @@ const Card = ({ id, linkImg, title, price, onAdd, onFavorite, listId }) => {
           <button
             className={
               'card__add-btn ' +
-              (isItemAdded(id) ? 'card__add-btn_type_active' : '') +
+              (isItemAdded(listId) ? 'card__add-btn_type_active ' : '') +
               (btnAddActive ? 'card__add-btn_type_loading' : '')
             }
             onClick={onClickAdd}
