@@ -3,8 +3,27 @@ import Card from '../components/Card/Card';
 
 import { AppContext } from '../App';
 
-function Home({searchValue, setSearchValue, onAddToBasket, onAddToFavorite, onChangeSearchInput, basketItems}) {
+function Home({ searchValue, setSearchValue, onAddToBasket, onAddToFavorite, onChangeSearchInput, basketItems, isLoading }) {
   const { items } = React.useContext(AppContext);
+
+  const renderItems = () => {
+    const filterItems = items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()));
+
+    return (isLoading
+      ?
+        [...Array(8)].map((item, index) => <Card key={index} loading={isLoading} />)
+      :
+        filterItems.map((item, index) =>
+          <Card
+            key={index}
+            onAdd={(obj) => onAddToBasket(obj)}
+            onFavorite={(obj) => onAddToFavorite(obj)}
+            basketItems={basketItems}
+            listId={item.id}
+            loading={isLoading}
+            {...item}
+          />))
+  }
 
   return (
     <div className='cards'>
@@ -17,19 +36,7 @@ function Home({searchValue, setSearchValue, onAddToBasket, onAddToFavorite, onCh
         </div>
       </div>
       <ul className='cards__list'>
-        {
-          items
-            .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-            .map((item, index) =>
-              <Card
-                key={index}
-                onAdd={(obj) => onAddToBasket(obj)}
-                onFavorite={(obj) => onAddToFavorite(obj)}
-                basketItems={basketItems}
-                listId={item.id}
-                { ... item }
-              />)
-        }
+        {renderItems()}
       </ul>
     </div>
   )
