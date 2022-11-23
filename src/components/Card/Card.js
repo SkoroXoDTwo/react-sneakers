@@ -3,7 +3,16 @@ import { AppContext } from '../../App';
 import './card.scss';
 import ContentLoader from 'react-content-loader';
 
-const Card = ({ id, linkImg, title, price, onAdd, onFavorite, listId, loading = false }) => {
+const Card = ({
+  id,
+  linkImg,
+  title,
+  price,
+  onAdd,
+  onFavorite,
+  listId,
+  loading = false,
+}) => {
 
   const { isItemAdded } = React.useContext(AppContext);
   const { isItemFavorite } = React.useContext(AppContext);
@@ -14,19 +23,19 @@ const Card = ({ id, linkImg, title, price, onAdd, onFavorite, listId, loading = 
     setBtnAddActive(true);
     await onAdd({ linkImg, title, price, id, listId });
     setBtnAddActive(false);
-
-
   }
+
   const onClickFavorite = async () => {
     setBtnLikeActive(true);
     await onFavorite({ linkImg, title, price, id, listId });
     setBtnLikeActive(false);
   }
 
+
+
   return (
     <li>
       <article className='card'>
-
         {
           loading ?
             <ContentLoader
@@ -75,7 +84,6 @@ const Card = ({ id, linkImg, title, price, onAdd, onFavorite, listId, loading = 
               </div>
             </>
         }
-
       </article>
     </li>
   );

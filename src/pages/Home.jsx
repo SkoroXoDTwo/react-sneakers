@@ -10,19 +10,17 @@ function Home({ searchValue, setSearchValue, onAddToBasket, onAddToFavorite, onC
     const filterItems = items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()));
 
     return (isLoading
-      ?
-        [...Array(8)].map((item, index) => <Card key={index} loading={isLoading} />)
-      :
-        filterItems.map((item, index) =>
-          <Card
-            key={index}
-            onAdd={(obj) => onAddToBasket(obj)}
-            onFavorite={(obj) => onAddToFavorite(obj)}
-            basketItems={basketItems}
-            listId={item.id}
-            loading={isLoading}
-            {...item}
-          />))
+      ? [...Array(8)].map((item, index) => <Card key={index} loading={isLoading} />)
+      : filterItems.map((item, index) =>
+        <Card
+          key={index}
+          onAdd={(obj) => onAddToBasket(obj)}
+          onFavorite={(obj) => onAddToFavorite(obj)}
+          basketItems={basketItems}
+          listId={item.id}
+          loading={isLoading}
+          {...item}
+        />))
   }
 
   return (
