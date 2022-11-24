@@ -96,5 +96,11 @@
     column-gap: 40px;
     row-gap: 40px;
     width: 100%;
+
+    &_null {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

@@ -1,26 +1,50 @@
 import React from 'react';
 import Card from '../components/Card/Card';
-
+import CardLoader from '../components/CardLoader/CardLoader';
+import Notice from '../components/Notice/Notice';
 import { AppContext } from '../App';
 
-function Home({ searchValue, setSearchValue, onAddToBasket, onAddToFavorite, onChangeSearchInput, basketItems, isLoading }) {
+const Home = ({
+  searchValue,
+  setSearchValue,
+  onAddToBasket,
+  onAddToFavorite,
+  onChangeSearchInput,
+  basketItems,
+  isLoading
+}) => {
+
   const { items } = React.useContext(AppContext);
 
-  const renderItems = () => {
-    const filterItems = items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()));
+  const filterItems = () => {
+    return items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()));
+  }
 
-    return (isLoading
-      ? [...Array(8)].map((item, index) => <Card key={index} loading={isLoading} />)
-      : filterItems.map((item, index) =>
-        <Card
-          key={index}
-          onAdd={(obj) => onAddToBasket(obj)}
-          onFavorite={(obj) => onAddToFavorite(obj)}
-          basketItems={basketItems}
-          listId={item.id}
-          loading={isLoading}
-          {...item}
-        />))
+  const renderItem = (item, index) => {
+    return (
+      <Card
+        key={index}
+        onAdd={(obj) => onAddToBasket(obj)}
+        onFavorite={(obj) => onAddToFavorite(obj)}
+        basketItems={basketItems}
+        listId={item.id}
+        {...item}
+      />
+    )
+  }
+
+  const renderItems = () => {
+    return (
+      isLoading
+        ? [...Array(8)].map((item, index) => <CardLoader key={index} />)
+        : filterItems().length > 0
+          ? filterItems().map((item, index) => renderItem(item, index))
+          : <Notice
+            title='Товаров не найдено =('
+            text='Список товаров пуст'
+            hasButton={false}
+          />
+    )
   }
 
   return (
@@ -33,7 +57,7 @@ function Home({ searchValue, setSearchValue, onAddToBasket, onAddToFavorite, onC
           {searchValue && <button className='cards__search-btn' onClick={() => setSearchValue('')}></button>}
         </div>
       </div>
-      <ul className='cards__list'>
+      <ul className={'cards__list ' + (filterItems().length > 0 || isLoading==true ? '' : 'cards__list_null')}>
         {renderItems()}
       </ul>
     </div>

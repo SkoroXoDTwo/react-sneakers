@@ -30,6 +30,7 @@ function Favorites({ onAddToFavorite, onAddToBasket }) {
         <Notice
           title='Закладок нет :('
           text='Вы ничего не добавляли в закладки'
+          hasButton={true}
         />
       }
 
