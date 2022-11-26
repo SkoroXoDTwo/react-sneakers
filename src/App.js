@@ -37,6 +37,18 @@ function App() {
     fetchData();
   }, []);
 
+  React.useEffect(() => {
+    function hiddenOverflow() {
+      console.log('render');
+      const body = document.querySelector('.body')
+      basketOpened
+        ? body.classList.add('body_over-hidden')
+        : body.classList.remove('body_over-hidden');
+    }
+
+    hiddenOverflow();
+  });
+
   const onAddToBasket = async (obj) => {
     try {
       const item = basketItems.find((item) => Number(item.listId) === Number(obj.listId));
@@ -107,7 +119,7 @@ function App() {
     const date = new Date();
 
     Object.assign(obj, basketItems);
-    obj[0].date = `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+    obj[0].date = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
 
     const { data } = await axios.post('https://636d0228ab4814f2b275a28e.mockapi.io/shopping', obj);
 

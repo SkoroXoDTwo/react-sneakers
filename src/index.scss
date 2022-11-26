@@ -9,4 +9,9 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+
+  &_over-hidden {
+    height: 100vh;
+    overflow: hidden;
+  }
 }

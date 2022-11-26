@@ -5,7 +5,6 @@
   margin: 0 auto;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
-  min-width: 550px;
 }
 
 .cards {
@@ -16,12 +15,24 @@
   width: 100%;
   box-sizing: border-box;
 
+  @media screen and (max-width: 600px) {
+    & {
+      padding: 20px 16px;
+    }
+  }
+
   &__header {
     padding: 0 0 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
+    @media screen and (max-width: 840px) {
+      & {
+        flex-direction: column;
+      }
+    }
   }
 
   &__title {
@@ -35,6 +46,19 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    max-width: 100%;
+
+    @media screen and (max-width: 840px) {
+      & {
+        align-self: flex-start;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      & {
+        font-size: 24px;
+      }
+    }
   }
 
   &__search {

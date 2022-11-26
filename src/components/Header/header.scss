@@ -5,6 +5,13 @@
   align-items: center;
   border-bottom: 1px solid #EAEAEA;
 
+  @media screen and (max-width: 600px) {
+    & {
+      padding: 20px 16px;
+    }
+  }
+
+
   &__logo {
     display: flex;
     align-items: center;
@@ -20,6 +27,12 @@
   &__logo-info {
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 600px) {
+      & {
+        display: none;
+      }
+    }
   }
 
   &__logo-title {

@@ -1,6 +1,5 @@
 import React from 'react';
 import './cardShopping.scss';
-import { AppContext } from '../../App';
 
 const CardShopping = ({ id, item }) => {
 
@@ -28,8 +27,6 @@ const CardShopping = ({ id, item }) => {
 
     return arr;
   }
-
-  console.log(handleItemToArray());
 
   return (
     <li>

@@ -11,6 +11,13 @@
     height: 120px;
     object-fit: contain;
     margin-bottom: 20px;
+
+    @media screen and (max-width: 600px) {
+      & {
+        width: 100px;
+        height: 100px;
+      }
+    }
   }
 
   &__title {
@@ -20,6 +27,12 @@
     font-size: 22px;
     line-height: 27px;
     color: #000000;
+
+    @media screen and (max-width: 600px) {
+      & {
+        font-size: 18px;
+      }
+    }
   }
 
   &__text {
@@ -31,10 +44,16 @@
     line-height: 24px;
     color: #000000;
     opacity: 0.4;
+
+    @media screen and (max-width: 600px) {
+      & {
+        font-size: 12px;
+      }
+    }
   }
 
   &__btn {
-    margin:40px 0 0;
+    margin: 40px 0 0;
     padding: 0;
     border: none;
     width: 280px;
@@ -61,6 +80,12 @@
     line-height: 19px;
     text-align: center;
     color: #FFFFFF;
+
+    @media screen and (max-width: 600px) {
+      & {
+        font-size: 16px;
+      }
+    }
   }
 
   &__btn-arrow {
@@ -73,4 +98,3 @@
     transform: rotate(-180deg)
   }
 }
-
