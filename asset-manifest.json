@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "./static/css/main.5b7b25f5.css",
+    "main.js": "./static/js/main.9bad51b0.js",
+    "static/media/card-add-btn-loading.svg": "./static/media/card-add-btn-loading.545277266b026fcbdd35.svg",
+    "static/media/card-add-btn-active.svg": "./static/media/card-add-btn-active.b9b03b04933f99f21173.svg",
+    "static/media/card-like-btn.svg": "./static/media/card-like-btn.296194cea7aa6e509c02.svg",
+    "static/media/card-like-btn-active.svg": "./static/media/card-like-btn-active.77a68a6e8c0aced1cdd6.svg",
+    "static/media/basket-cross-btn.svg": "./static/media/basket-cross-btn.845f3635ea9172b44524.svg",
+    "index.html": "./index.html",
+    "static/media/card-add-btn.svg": "./static/media/card-add-btn.503fc6fb310835033a9b.svg",
+    "static/media/btn-arrow.svg": "./static/media/btn-arrow.166e2db0065ecfe6f91a.svg",
+    "main.5b7b25f5.css.map": "./static/css/main.5b7b25f5.css.map",
+    "main.9bad51b0.js.map": "./static/js/main.9bad51b0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5b7b25f5.css",
+    "static/js/main.9bad51b0.js"
+  ]
+}
