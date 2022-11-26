@@ -16,6 +16,7 @@
   &__container {
     margin: 0 0 10px;
     padding: 20px;
+    list-style: none;
     border: 1px solid #F3F3F3;
     border-radius: 40px;
     height: 280px;
@@ -27,12 +28,23 @@
     grid-template-rows: repeat(2, 1fr);
     overflow: hidden;
     gap: 10px;
+    position: relative;
 
     &:hover {
       cursor: pointer;
       transform: translateY(-5px);
       box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
     }
+  }
+
+  &__count {
+    position: absolute;
+    left: 30px;
+    top: 20px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #9A9999;
   }
 
   &__container-item {
