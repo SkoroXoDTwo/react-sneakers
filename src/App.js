@@ -6,12 +6,14 @@ import Header from './components/Header/Header';
 import Basket from './components/Basket/Basket';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
+import Shopping from './pages/Shopping';
 
 export const AppContext = React.createContext([]);
 
 function App() {
   const [items, setItems] = React.useState([]);
   const [basketItems, setBasketItems] = React.useState([]);
+  const [shoppingItems, setShoppingItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [basketOpened, setBasketOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
@@ -23,11 +25,13 @@ function App() {
 
       const basketResponse = await axios.get('https://636d0228ab4814f2b275a28e.mockapi.io/basket');
       const favoritesResponse = await axios.get('https://636d0228ab4814f2b275a28e.mockapi.io/favorites');
+      const shoppingResponse = await axios.get('https://636d0228ab4814f2b275a28e.mockapi.io/shopping');
       const itemsResponse = await axios.get('https://636d0228ab4814f2b275a28e.mockapi.io/items');
 
       setIsLoadingCard(false);
       setBasketItems(basketResponse.data);
       setFavorites(favoritesResponse.data);
+      setShoppingItems(shoppingResponse.data);
       setItems(itemsResponse.data);
     }
     fetchData();
@@ -69,7 +73,7 @@ function App() {
       }
     }
     catch (error) {
-      alert('Не удалось добавить в фавориты');
+      alert('Что-то пошло не так');
     }
 
   };
@@ -86,7 +90,7 @@ function App() {
     return favorites.some((obj) => Number(obj.listId) === Number(id))
   }
 
-  const calculateSumBasket = () => {
+  const calculateSumItem = () => {
     let sum = Number(0);
 
     basketItems.forEach(item => {
@@ -96,14 +100,37 @@ function App() {
     return sum;
   }
 
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const onSubmitToBasket = async () => {
+    const obj = [];
+    const date = new Date();
+
+    Object.assign(obj, basketItems);
+    obj[0].date = `${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`
+
+    const { data } = await axios.post('https://636d0228ab4814f2b275a28e.mockapi.io/shopping', obj);
+
+    setBasketItems([]);
+
+    for (let i = 0; i < basketItems.length; i++) {
+      const item = basketItems[i];
+      await axios.delete('https://636d0228ab4814f2b275a28e.mockapi.io/basket/' + item.id);
+      await delay(200);
+    }
+
+    setShoppingItems((prev) => [...prev, data]);
+  }
+
   return (
-    <AppContext.Provider value={{ items, basketItems, favorites, isItemAdded, isItemFavorite, calculateSumBasket }}>
+    <AppContext.Provider value={{ items, basketItems, favorites, shoppingItems, isItemAdded, isItemFavorite, calculateSumItem }}>
       <div className="page">
         <Basket
           basketOpened={basketOpened}
           items={basketItems}
           onClickCloseBtn={() => setBasketOpened(false)}
           onRemoveItem={onRemoveToBasket}
+          onSubmitToBasket={onSubmitToBasket}
         />
 
         <Header onClickBasket={() => setBasketOpened(true)} />
@@ -125,6 +152,10 @@ function App() {
               onAddToFavorite={onAddToFavorite}
               onAddToBasket={onAddToBasket}
             />
+          } />
+
+          <Route path="/shopping" element={
+            <Shopping />
           } />
         </Routes>
       </div>

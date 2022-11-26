@@ -6,6 +6,8 @@ import Notice from '../components/Notice/Notice';
 function Favorites({ onAddToFavorite, onAddToBasket }) {
   const { favorites } = React.useContext(AppContext);
 
+
+
   return (
     <div className='cards'>
       <div className='cards__header'>
@@ -21,7 +23,6 @@ function Favorites({ onAddToFavorite, onAddToBasket }) {
                   onAdd={(obj) => onAddToBasket(obj)}
                   onFavorite={(obj) => onAddToFavorite(obj)}
                   favorited={true}
-                  listId={item.listId}
                   {...item}
                 />)
           }

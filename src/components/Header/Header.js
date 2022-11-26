@@ -1,10 +1,10 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './header.scss';
 import { AppContext } from '../../App';
 
 const Header = (props) => {
-  const { calculateSumBasket } = React.useContext(AppContext);
+  const { calculateSumItem } = React.useContext(AppContext);
 
   return (
     <header className='header'>
@@ -23,7 +23,7 @@ const Header = (props) => {
           <li>
             <button className='header__menu-button' onClick={props.onClickBasket}>
               <img className='header__menu-icon' src='./images/menu-basket-icon.svg' alt="кнопка меню корзины"></img>
-              <span className='header__menu-text'>{`${calculateSumBasket()} руб.`}</span>
+              <span className='header__menu-text'>{`${calculateSumItem()} руб.`}</span>
             </button>
           </li>
 
@@ -35,11 +35,13 @@ const Header = (props) => {
             </li>
           </Link>
 
-          <li>
-            <button className='header__menu-button'>
-              <img className='header__menu-icon' src='./images/menu-profile-icon.svg' alt="кнопка меню профиля"></img>
-            </button>
-          </li>
+          <Link to={'/shopping'}>
+            <li>
+              <button className='header__menu-button'>
+                <img className='header__menu-icon' src='./images/menu-profile-icon.svg' alt="кнопка меню профиля"></img>
+              </button>
+            </li>
+          </Link>
         </ul>
       </nav>
     </header>

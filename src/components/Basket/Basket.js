@@ -2,8 +2,8 @@ import React from 'react';
 import './basket.scss';
 import { AppContext } from '../../App';
 
-const Basket = ({ items = [], onClickCloseBtn, onRemoveItem, basketOpened }) => {
-  const { calculateSumBasket } = React.useContext(AppContext);
+const Basket = ({ items = [], onClickCloseBtn, onRemoveItem, basketOpened, onSubmitToBasket }) => {
+  const { calculateSumItem } = React.useContext(AppContext);
 
   return (
     <div className={'basket ' + (basketOpened ? 'basket_opened' : '')}>
@@ -46,14 +46,14 @@ const Basket = ({ items = [], onClickCloseBtn, onRemoveItem, basketOpened }) => 
             <div className='basket__count-container'>
               <p className='basket__count-title'>Итого:</p>
               <span className='basket__count-line'></span>
-              <span className='basket__count-price'>{`${calculateSumBasket()} руб.`}</span>
+              <span className='basket__count-price'>{`${calculateSumItem()} руб.`}</span>
             </div>
             <div className='basket__count-container'>
               <p className='basket__count-title'>Доствка 5%</p>
               <span className='basket__count-line'></span>
-              <span className='basket__count-price'>{`${Math.floor(calculateSumBasket() * 0.05)} руб.`}</span>
+              <span className='basket__count-price'>{`${Math.floor(calculateSumItem() * 0.05)} руб.`}</span>
             </div>
-            <button className='basket__process-btn'>
+            <button className='basket__process-btn' onClick={onSubmitToBasket}>
               <p className='basket__btn-text'>Оформить заказ</p>
               <span className='basket__btn-arrow'></span>
             </button>
