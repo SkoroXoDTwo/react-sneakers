@@ -57,7 +57,7 @@ const Home = ({
           {searchValue && <button className='cards__search-btn' onClick={() => setSearchValue('')}></button>}
         </div>
       </div>
-      <ul className={'cards__list ' + (filterItems().length > 0 || isLoading==true ? '' : 'cards__list_null')}>
+      <ul className={'cards__list ' + (filterItems().length > 0 || isLoading == true ? '' : 'cards__list_null')}>
         {renderItems()}
       </ul>
     </div>

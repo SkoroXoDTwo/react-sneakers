@@ -1,7 +1,7 @@
 .page {
   max-width: 1080px;
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   margin: 0 auto;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
@@ -62,11 +62,27 @@
     }
   }
 
+  &__clear-btn {
+    border: 1px solid #d55a5a;
+    border-radius: 40px;
+    background: none;
+    color: #d55a5a;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    transition: opacity 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+  }
+
   &__search {
     padding: 13px;
     display: flex;
     align-items: center;
-    border: 1px solid #F3F3F3;
+    border: 1px solid #f3f3f3;
     border-radius: 10px;
     max-width: 250px;
     width: 100%;
@@ -91,7 +107,7 @@
       font-weight: 400;
       font-size: 14px;
       line-height: 17px;
-      color: #C4C4C4;
+      color: #c4c4c4;
     }
   }
 
@@ -104,11 +120,11 @@
     min-width: 14px;
     width: 20px;
     background-size: cover;
-    transition: opacity .2s;
+    transition: opacity 0.2s;
 
     &:hover {
       cursor: pointer;
-      opacity: .6;
+      opacity: 0.6;
     }
   }
 
