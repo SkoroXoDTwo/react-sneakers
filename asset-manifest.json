@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.3945a2e6.css",
-    "main.js": "./static/js/main.39a72abf.js",
+    "main.css": "./static/css/main.b8bab133.css",
+    "main.js": "./static/js/main.f4f99a6b.js",
     "static/media/card-add-btn-loading.svg": "./static/media/card-add-btn-loading.545277266b026fcbdd35.svg",
     "static/media/card-add-btn-active.svg": "./static/media/card-add-btn-active.b9b03b04933f99f21173.svg",
     "static/media/card-like-btn.svg": "./static/media/card-like-btn.296194cea7aa6e509c02.svg",
@@ -11,11 +11,11 @@
     "static/media/card-add-btn.svg": "./static/media/card-add-btn.503fc6fb310835033a9b.svg",
     "static/media/btn-arrow.svg": "./static/media/btn-arrow.166e2db0065ecfe6f91a.svg",
     "static/media/btn-close-icon.svg": "./static/media/btn-close-icon.039f1f5203f653b4bacd.svg",
-    "main.3945a2e6.css.map": "./static/css/main.3945a2e6.css.map",
-    "main.39a72abf.js.map": "./static/js/main.39a72abf.js.map"
+    "main.b8bab133.css.map": "./static/css/main.b8bab133.css.map",
+    "main.f4f99a6b.js.map": "./static/js/main.f4f99a6b.js.map"
   },
   "entrypoints": [
-    "static/css/main.3945a2e6.css",
-    "static/js/main.39a72abf.js"
+    "static/css/main.b8bab133.css",
+    "static/js/main.f4f99a6b.js"
   ]
 }
