@@ -2,8 +2,11 @@ import './App.scss';
 import React from 'react';
 import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
+
 import Header from './components/Header/Header';
 import Basket from './components/Basket/Basket';
+import OrderInfo from './components/OrderInfo/OrderInfo';
+
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import Shopping from './pages/Shopping';
@@ -16,6 +19,7 @@ function App() {
   const [shoppingItems, setShoppingItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [basketOpened, setBasketOpened] = React.useState(false);
+  const [orderInfoOpened, setOrderInfoOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState('');
   const [isLoadingCard, setIsLoadingCard] = React.useState(true);
 
@@ -39,7 +43,6 @@ function App() {
 
   React.useEffect(() => {
     function hiddenOverflow() {
-      console.log('render');
       const body = document.querySelector('.body')
       basketOpened
         ? body.classList.add('body_over-hidden')
@@ -47,7 +50,7 @@ function App() {
     }
 
     hiddenOverflow();
-  });
+  }, [basketOpened]);
 
   const onAddToBasket = async (obj) => {
     try {
@@ -115,6 +118,8 @@ function App() {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const onSubmitToBasket = async () => {
+    setBasketOpened(false);
+
     const obj = [];
     const date = new Date();
 
@@ -132,10 +137,37 @@ function App() {
     }
 
     setShoppingItems((prev) => [...prev, data]);
+    setOrderInfoOpened(true);
+  }
+
+  const closeOrderInfo = () => {
+    setOrderInfoOpened(false);
+  }
+
+  const calculateSumOrder = (item) => {
+    let sum = Number(0);
+
+    for (let key in item) {
+      if (key === 'id') {
+        break;
+      }
+      sum += Number(item[key].price);
+    }
+    return sum;
   }
 
   return (
-    <AppContext.Provider value={{ items, basketItems, favorites, shoppingItems, isItemAdded, isItemFavorite, calculateSumItem }}>
+    <AppContext.Provider value={{
+      items,
+      basketItems,
+      favorites,
+      shoppingItems,
+      isItemAdded,
+      isItemFavorite,
+      calculateSumItem,
+      calculateSumOrder
+    }}>
+
       <div className="page">
         <Basket
           basketOpened={basketOpened}
@@ -145,6 +177,10 @@ function App() {
           onSubmitToBasket={onSubmitToBasket}
         />
 
+        <OrderInfo
+          isOpened={orderInfoOpened}
+          close={closeOrderInfo}
+        />
         <Header onClickBasket={() => setBasketOpened(true)} />
 
         <Routes>
@@ -171,7 +207,7 @@ function App() {
           } />
         </Routes>
       </div>
-    </AppContext.Provider>
+    </AppContext.Provider >
 
   );
 }

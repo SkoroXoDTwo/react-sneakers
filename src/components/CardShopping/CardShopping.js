@@ -1,19 +1,10 @@
 import React from 'react';
+import { AppContext } from '../../App';
 import './cardShopping.scss';
 
 const CardShopping = ({ id, item }) => {
 
-  const calculateSumOrder = () => {
-    let sum = Number(0);
-
-    for (let key in item) {
-      if (key === 'id') {
-        break;
-      }
-      sum += Number(item[key].price);
-    }
-    return sum;
-  }
+  const { calculateSumOrder } = React.useContext(AppContext);
 
   const handleItemToArray = () => {
     const arr = [];
@@ -43,7 +34,7 @@ const CardShopping = ({ id, item }) => {
           }
         </ul>
         <div className='card-shopping__info'>
-          <p className='card-shopping__info-text'>{calculateSumOrder()} руб.</p>
+          <p className='card-shopping__info-text'>{calculateSumOrder(item)} руб.</p>
           <p className='card-shopping__info-text'>{item[0].date}</p>
         </div>
       </article>
