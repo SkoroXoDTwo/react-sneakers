@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.scss';
-import { AppContext } from '../../App';
+import { AppContext } from '../../contexts/AppContext';
 
 const Header = (props) => {
   const { calculateSumItem } = React.useContext(AppContext);

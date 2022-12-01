@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../components/Card/Card';
 import CardLoader from '../components/CardLoader/CardLoader';
 import Notice from '../components/Notice/Notice';
-import { AppContext } from '../App';
+import { AppContext } from '../contexts/AppContext';
 
 const Home = ({
   searchValue,

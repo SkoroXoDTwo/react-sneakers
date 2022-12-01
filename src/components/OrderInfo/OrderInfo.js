@@ -1,6 +1,6 @@
 import React from "react";
 import "./OrderInfo.scss";
-import { AppContext } from "../../App";
+import { AppContext } from '../../contexts/AppContext';
 
 const OrderInfo = ({ isOpened, close }) => {
   const [numberRandomEmoji, setNumberRandomEmoji] = React.useState(1);

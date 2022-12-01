@@ -1,6 +1,6 @@
 import React from "react";
 import "./basket.scss";
-import { AppContext } from "../../App";
+import { AppContext } from '../../contexts/AppContext';
 
 const Basket = ({
   items = [],

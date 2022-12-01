@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppContext } from '../App';
+import { AppContext } from '../contexts/AppContext';
 import CardShopping from '../components/CardShopping/CardShopping';
 import Notice from '../components/Notice/Notice';
 

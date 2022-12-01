@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Shopping from "./pages/Shopping";
 
-export const AppContext = React.createContext([]);
+import { AppContext } from './contexts/AppContext';
 
 function App() {
   const [items, setItems] = React.useState([]);

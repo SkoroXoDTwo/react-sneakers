@@ -1,5 +1,5 @@
 import React from "react";
-import { AppContext } from "../../App";
+import { AppContext } from '../../contexts/AppContext';
 import "./cardShopping.scss";
 
 const CardShopping = ({ id, item }) => {
